@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet 3 - Baptiste, Quentin et Kéwan</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/default.min.css">
+<script src="./js/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+  <section class="titre">
+    <h2 class="left">Algorithmique</h2>
+    <h1>Projet 3 - Optimisation</h1>
+    <h3>Quentin, Baptiste et Kéwan</h3>
+  </section>
+  <section>
+    <h1>Présentation du problème</h1>
+    <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5 Go maximum</strong>. L'objetif est de classer les vidéos pour que cela donne la plus grande durée  de vidéos possible, tout en étant inférieur à 5 Go</p>
+    <p>Les vidéos sont stockées dans un tableau de 10 éléments, chaque élément contient le nom de la vidéo, sa taille et sa durée. <br>
+      Les données sont les suivantes
+    </p>
+    <ul>
+      <li>
+        <p>Film d'intrigue à suspense: <strong>4,57 Go → 114 min</strong></p>
+        <p>Film d'animation japonais: <strong>2,71 Go → 80 min</strong></p>
+        <p>Court-métrage 1: <strong>630 Mo → 32 min</strong></p>
+        <p>Court-métrage 2: <strong>1,65 Go → 20 min</strong></p>
+        <p>Court-métrage 3: <strong>2,15 Go → 18 min</strong></p>
+        <p>Vlog 1: <strong>85 Mo → 4 min</strong></p>
+        <p>Vlog 2: <strong>320 Mo → 5 min</strong></p>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Généralisation du problème</h1>
+    <p>Pour généraliser le problème, on transforme nos valeurs en variables. La 1ère variable est la taille de la Clé USB, on crée donc une variable <span class="var">tailleMax</span>. <br>
+      Il faut ensuite généraliser les données de l'exercice, on crée donc un <strong>tableau de dictionnaires</strong>, qui contiendra tous les objets des vidéos, avec comme clés: leur <span class="var">nom</span>, leur <span class="var">duree</span> et leur <span class="var">taille</span>
+    </p>
+  </section>
+  <section>
+    <h1>Solutions Algorithmique</h1>
+    <p>On a décidés de résoudre ce problème de <strong>3</strong> solutions différentes:</p>
+    <div class="solutions">
+      <div>
+        <h2>Solution 1</h2>
+      <pre><code class="language-python">
+def solution1():
+  # On crée une variable qui contiendra la taille totale des vidéos
+  tailleTotale = 0
+  # On crée une variable qui contiendra la durée totale des vidéos
+  dureeTotale = 0
+
+  for i in range(len(tableau)):
+    # On vérifie si la taille totale des vidéos est inférieur à la taille de la clé USB
+    if tailleTotale < tailleMax:
+      # On ajoute la taille de la vidéo à la taille totale
+      tailleTotale += tableau[i]["taille"]
+
+      </code></pre>
+      </div>
+      <div>
+        <h2>Solution 2</h2>
+      <pre><code class="language-python">
+def solution2():
+  # On crée une variable qui contiendra la taille totale des vidéos
+  tailleTotale = 0
+  # On crée une variable qui contiendra la durée totale des vidéos
+  dureeTotale = 0
+
+  for i in range(len(tableau)):
+    # On vérifie si la taille totale des vidéos est inférieur à la taille de la clé USB
+    if tailleTotale < tailleMax:
+      # On ajoute la taille de la vidéo à la taille totale
+      tailleTotale += tableau[i]["taille"]
+
+      </code></pre>
+      </div>
+      <div>
+        <h2>Solution 3</h2>
+      <pre><code class="language-python">
+def solution3():
+  # On crée une variable qui contiendra la taille totale des vidéos
+  tailleTotale = 0
+  # On crée une variable qui contiendra la durée totale des vidéos
+  dureeTotale = 0
+
+  for i in range(len(tableau)):
+    # On vérifie si la taille totale des vidéos est inférieur à la taille de la clé USB
+    if tailleTotale < tailleMax:
+      # On ajoute la taille de la vidéo à la taille totale
+      tailleTotale += tableau[i]["taille"]
+
+      </code></pre>
+      </div>
+
+
+    </div>
+  </section>
+</body>
+</html>

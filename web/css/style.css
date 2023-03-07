@@ -1,0 +1,58 @@
+* {
+  /* top: 0; */
+  /* left: 0; */
+  /* margin: 0; */
+  /* padding: 0; */
+  /* border: 0; */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+h1, h2, h3, h4{
+  margin: 0;
+  padding: 0;
+}
+
+ul{
+  list-style: none;
+}
+
+.left{
+  text-align: left;
+}
+
+body {
+  color: #333;
+  background: #f4f4f4;
+}
+
+section{
+  margin-bottom: 20px;
+}
+
+.titre h1{
+  font-size: 2.6em;
+}
+
+section p{
+  max-width: 60vw;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.var{
+  color: rgb(0, 0, 145);
+  font-weight: bold;
+}
+
+.solutions{
+  text-align: left;
+  display: flex;  
+  /* 2 items max */
+  flex-wrap: wrap;
+  width: 98vw;
+}
+
+.solutions div code {
+  text-align: left;
+}
