@@ -1,103 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projet 3 - Baptiste, Quentin et Kéwan</title>
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/default.min.css">
-<script src="./js/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+  <link rel="icon" href="./img/favicon.jpg">
+
+  <!-- Librairie pour afficher le code -->
+  <link rel="stylesheet" href="./lib/vs2015.min.css">
+  <script src="./lib/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  
 </head>
+
 <body>
-  <section class="titre">
-    <h2 class="left">Algorithmique</h2>
-    <h1>Projet 3 - Optimisation</h1>
-    <h3>Quentin, Baptiste et Kéwan</h3>
-  </section>
-  <section>
-    <h1>Présentation du problème</h1>
-    <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5 Go maximum</strong>. L'objetif est de classer les vidéos pour que cela donne la plus grande durée  de vidéos possible, tout en étant inférieur à 5 Go</p>
-    <p>Les vidéos sont stockées dans un tableau de 10 éléments, chaque élément contient le nom de la vidéo, sa taille et sa durée. <br>
-      Les données sont les suivantes
-    </p>
-    <ul>
-      <li>
-        <p>Film d'intrigue à suspense: <strong>4,57 Go → 114 min</strong></p>
-        <p>Film d'animation japonais: <strong>2,71 Go → 80 min</strong></p>
-        <p>Court-métrage 1: <strong>630 Mo → 32 min</strong></p>
-        <p>Court-métrage 2: <strong>1,65 Go → 20 min</strong></p>
-        <p>Court-métrage 3: <strong>2,15 Go → 18 min</strong></p>
-        <p>Vlog 1: <strong>85 Mo → 4 min</strong></p>
-        <p>Vlog 2: <strong>320 Mo → 5 min</strong></p>
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h1>Généralisation du problème</h1>
-    <p>Pour généraliser le problème, on transforme nos valeurs en variables. La 1ère variable est la taille de la Clé USB, on crée donc une variable <span class="var">tailleMax</span>. <br>
-      Il faut ensuite généraliser les données de l'exercice, on crée donc un <strong>tableau de dictionnaires</strong>, qui contiendra tous les objets des vidéos, avec comme clés: leur <span class="var">nom</span>, leur <span class="var">duree</span> et leur <span class="var">taille</span>
-    </p>
-  </section>
-  <section>
-    <h1>Solutions Algorithmique</h1>
-    <p>On a décidés de résoudre ce problème de <strong>3</strong> solutions différentes:</p>
-    <div class="solutions">
-      <div>
-        <h2>Solution 1</h2>
-      <pre><code class="language-python">
-def solution1():
-  # On crée une variable qui contiendra la taille totale des vidéos
-  tailleTotale = 0
-  # On crée une variable qui contiendra la durée totale des vidéos
-  dureeTotale = 0
-
-  for i in range(len(tableau)):
-    # On vérifie si la taille totale des vidéos est inférieur à la taille de la clé USB
-    if tailleTotale < tailleMax:
-      # On ajoute la taille de la vidéo à la taille totale
-      tailleTotale += tableau[i]["taille"]
-
-      </code></pre>
-      </div>
-      <div>
-        <h2>Solution 2</h2>
-      <pre><code class="language-python">
-def solution2():
-  # On crée une variable qui contiendra la taille totale des vidéos
-  tailleTotale = 0
-  # On crée une variable qui contiendra la durée totale des vidéos
-  dureeTotale = 0
-
-  for i in range(len(tableau)):
-    # On vérifie si la taille totale des vidéos est inférieur à la taille de la clé USB
-    if tailleTotale < tailleMax:
-      # On ajoute la taille de la vidéo à la taille totale
-      tailleTotale += tableau[i]["taille"]
-
-      </code></pre>
-      </div>
-      <div>
-        <h2>Solution 3</h2>
-      <pre><code class="language-python">
-def solution3():
-  # On crée une variable qui contiendra la taille totale des vidéos
-  tailleTotale = 0
-  # On crée une variable qui contiendra la durée totale des vidéos
-  dureeTotale = 0
-
-  for i in range(len(tableau)):
-    # On vérifie si la taille totale des vidéos est inférieur à la taille de la clé USB
-    if tailleTotale < tailleMax:
-      # On ajoute la taille de la vidéo à la taille totale
-      tailleTotale += tableau[i]["taille"]
-
-      </code></pre>
-      </div>
-
-
+  <header>
+    <div class="top">
+      <h2>Algorithmique</h2>
+      <h3>Quentin, Baptiste et Kéwan</h3>
     </div>
-  </section>
+    <h1>Projet 3 - Optimisation</h1>
+  </header>
+  <a href="./clair.html">Mode Clair</a>
+  <div class="flex">
+
+    <main>
+      <section>
+        <h1>Présentation du problème</h1>
+        <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5Go maximum</strong>. L'objetif est de classer les vidéos pour que cela donne la plus grande durée de vidéos possible, tout en étant inférieur à 5 Go</p>
+        <p>Les vidéos sont stockées dans un tableau de 10 éléments, chaque élément contient le nom de la vidéo, sa taille et sa durée.<br><br>
+        Les données sont les suivantes:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nom de la vidéo</th>
+                <th>Taille</th>
+                <th>Durée</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Film d'intrigue à suspense</td>
+                <td>4,57 Go</td>
+                <td>114 min</td>
+              </tr>
+              <tr>
+                <td>Film d'animation japonais</td>
+                <td>2,71 Go</td>
+                <td>80 min</td>
+              </tr>
+              <tr>
+                <td>Court-métrage 1</td>
+                <td>630 Mo</td>
+                <td>32 min</td>
+              </tr>
+              <tr>
+                <td>Court-métrage 2</td>
+                <td>1,65 Go</td>
+                <td>20 min</td>
+              </tr>
+              <tr>
+                <td>Court-métrage 3</td>
+                <td>2,15 Go</td>
+                <td>18 min</td>
+              </tr>
+              <tr>
+                <td>Vlog 1</td>
+                <td>85 Mo</td>
+                <td>4 min</td>
+              </tr>
+              <tr>
+                <td>Vlog 2</td>
+                <td>320 Mo</td>
+                <td>5 min</td>
+              </tr>
+            </tbody>
+          </table>
+
+      </section>
+      <section>
+        <h1>Généralisation du problème</h1>
+        <p>Pour généraliser le problème, on transforme nos valeurs en variables. La 1ère variable est la taille de la Clé USB, on crée donc une variable <span class="var">tailleMax</span>.<br>
+        Il faut ensuite généraliser les données de l'exercice, on crée donc un <strong>tableau de dictionnaires</strong>, qui contiendra tous les objets des vidéos, avec comme clés: leur <span class="var">nom</span>, leur <span class="var">duree</span> et leur <span class="var">taille</span></p>
+      </section>
+      <section>
+        <h1>Solutions Algorithmique</h1>
+        <p>On a décidés de résoudre ce problème de <strong>3</strong> solutions différentes:</p>
+        Voici notre tableau de données:
+        <pre><code class="language-python">
+films = [
+  {
+    "nom": "film d'intrigue à suspense",
+    "duree": 114,
+    "taille": 4.57,
+  },
+  {
+    "nom": "film d'animation japonais",
+    "duree": 80,
+    "taille": 2.71,
+  },
+  {
+    "nom": "court-métrage 1",
+    "duree": 32,
+    "taille": 0.63,
+  },
+  {
+    "nom": "court-métrage 2",
+    "duree": 20,
+    "taille": 1.65,
+  },
+  {
+    "nom": "court-métrage 3",
+    "duree": 18,
+    "taille": 2.15,
+  },
+  {
+    "nom": "vlog 1",
+    "duree": 4,
+    "taille": 0.085,
+  },
+  {
+    "nom": "vlog 2",
+    "duree": 5,
+    "taille": 0.320
+  }
+]
+        </code></pre>
+        <div class="solutions">
+          <div>
+            <h2>Solution 1</h2>
+            La première solution est un algorithme glouton. Cet algorithme calcule pour chaque vidéo un rapport entre la taille et la durée. Il trie les vidéos par odre décroissant en fonction de ce rapport.<br>
+            Il prends ensuite les vidéos avec le plus grand rapport jusqu'à arriver à la tailleMax définie. <br><br>
+
+            <pre><code class="language-python"></code></pre>
+            <a href="./algos/solution1.py">Télécharger le programme</a>
+          </div>
+          <div>
+            <h2>Solution 2</h2>
+            La deuxième solution est également un algorithme glouton. Il consiste à trier les vidéos par ordre décroissant en fonction de leur durée. Il prends ensuite les vidéos avec les plus grandes durées jusqu'à arriver à la tailleMax definie.<br><br>
+            <pre><code class="language-python"></code></pre>
+            <a href="./algos/solution2.py">Télécharger le programme</a>
+          </div>
+          <div>
+            <h2>Solution 3</h2>
+            <p></p>
+            <a href="./algos/solution3.py">Télécharger le programme</a>
+          </div>
+      </section>
+      <section>
+        <h2>Commentaire sur le problème</h2>
+      </section>
+    </main>
+
+    <aside>
+      <h1>Histoire de l'Algorithmique</h1>
+      <p>L'histoire de l'algorithmique remonte à plusieurs siècles avant notre ère, avec les premières formes de calcul et de résolution de problèmes mathématiques. <br><br>
+      Toutefois, l'essor de l'algorithmique moderne est généralement associé à l'invention de l'ordinateur et à l'explosion de la puissance de calcul qui s'en est suivie. Dans les années 1930, des mathématiciens tels que Alonzo Church et Alan Turing ont commencé à explorer les limites de ce qui était calculable, en développant des modèles théoriques de machines abstraites appelées "machines de Turing". <br><br>
+      Dans les années 1950, des chercheurs tels que John von Neumann et Donald Knuth ont commencé à développer des algorithmes plus sophistiqués pour des tâches telles que la résolution de systèmes linéaires et la simulation numérique. <br><br>
+      Aujourd'hui, l'algorithmique est au cœur de nombreux domaines de l'informatique, de la science des données et de l'intelligence artificielle, et est utilisée pour résoudre des problèmes dans une grande variété de domaines, de la finance à la biologie en passant par l'ingénierie et les sciences sociales.</p>
+      <h2>Sources:</h2>
+      <p class="sources">
+        "The History of Computing" de Jack Copeland et Jonathan Bowen <br>
+        "The Art of Computer Programming" de Donald Knuth <br>
+        "The Turing Guide" de Jack Copeland et Diane Proudfoot <br>
+        Le site web de l'Association for Computing Machinery (ACM) <br>
+        Le site web de l'Institut de l'Informatique et des Systèmes d'Information (IRI) de l'Université Paris Descartes.
+      </p>
+
+    </aside>
+  </div>
 </body>
+
 </html>
