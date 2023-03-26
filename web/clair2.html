@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet 3 - Baptiste, Quentin et Kéwan</title>
+  <link rel="stylesheet" href="./src/styleclair.css">
+  <link rel="stylesheet" href="./css/default.min.css">
+  <script src="./js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="icon" href="./img/favicon.jpg">
+</head>
+
+<body>
+  <header>
+    <div class="top">
+      <h2>Algorithmique</h2>
+      <h3>Quentin, Baptiste et Kéwan</h3>
+    </div>
+    <h1>Projet 3 - Optimisation</h1>
+  </header>
+  <div class="flex">
+    
+    <main>
+      <a href="./index.html">Mode sombre</a>
+      <section>
+        <h1>Présentation du problème</h1>
+        <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5Go maximum</strong>. L'objetif est de classer les vidéos pour que cela donne la plus grande durée de vidéos possible, tout en étant inférieur à 5 Go</p>
+        <p>Les vidéos sont stockées dans un tableau de 10 éléments, chaque élément contient le nom de la vidéo, sa taille et sa durée.<br><br>
+        Les données sont les suivantes:</p>
+
+        <!-- <div class="flex"> -->
+          <table>
+            <thead>
+              <tr>
+                <th>Nom de la vidéo</th>
+                <th>Taille</th>
+                <th>Durée</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Film d'intrigue à suspense</td>
+                <td>4,57 Go</td>
+                <td>114 min</td>
+              </tr>
+              <tr>
+                <td>Film d'animation japonais</td>
+                <td>2,71 Go</td>
+                <td>80 min</td>
+              </tr>
+              <tr>
+                <td>Court-métrage 1</td>
+                <td>630 Mo</td>
+                <td>32 min</td>
+              </tr>
+              <tr>
+                <td>Court-métrage 2</td>
+                <td>1,65 Go</td>
+                <td>20 min</td>
+              </tr>
+              <tr>
+                <td>Court-métrage 3</td>
+                <td>2,15 Go</td>
+                <td>18 min</td>
+              </tr>
+              <tr>
+                <td>Vlog 1</td>
+                <td>85 Mo</td>
+                <td>4 min</td>
+              </tr>
+              <tr>
+                <td>Vlog 2</td>
+                <td>320 Mo</td>
+                <td>5 min</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <a href="./src/video_importante.mp4" target="_blank"><img src="./src/meme.gif"></a>
+          </div>
+        <!-- </div> -->
+
+      </section>
+      <section>
+        <h1>Généralisation du problème</h1>
+        <p>Pour généraliser le problème, on transforme nos valeurs en variables. La 1ère variable est la taille de la Clé USB, on crée donc une variable <span class="var">tailleMax</span>.<br>
+        Il faut ensuite généraliser les données de l'exercice, on crée donc un <strong>tableau de dictionnaires</strong>, qui contiendra tous les objets des vidéos, avec comme clés: leur <span class="var">nom</span>, leur <span class="var">duree</span> et leur <span class="var">taille</span></p>
+      </section>
+      <section>
+        <h1>Solutions Algorithmique</h1>
+        <p>On a décidés de résoudre ce problème de <strong>3</strong> solutions différentes:</p>
+        <div class="solutions">
+          <div>
+            <h2>Solution 1</h2>
+            <pre><code class="language-python"></code></pre>
+          </div>
+      </section>
+    </main>
+
+    <aside>
+      <h1>Histoire de l'Algorithmique</h1>
+      <p>L'histoire de l'algorithmique remonte à plusieurs siècles avant notre ère, avec les premières formes de calcul et de résolution de problèmes mathématiques. <br><br>
+      Toutefois, l'essor de l'algorithmique moderne est généralement associé à l'invention de l'ordinateur et à l'explosion de la puissance de calcul qui s'en est suivie. Dans les années 1930, des mathématiciens tels que Alonzo Church et Alan Turing ont commencé à explorer les limites de ce qui était calculable, en développant des modèles théoriques de machines abstraites appelées "machines de Turing". <br><br>
+      Dans les années 1950, des chercheurs tels que John von Neumann et Donald Knuth ont commencé à développer des algorithmes plus sophistiqués pour des tâches telles que la résolution de systèmes linéaires et la simulation numérique. <br><br>
+      Aujourd'hui, l'algorithmique est au cœur de nombreux domaines de l'informatique, de la science des données et de l'intelligence artificielle, et est utilisée pour résoudre des problèmes dans une grande variété de domaines, de la finance à la biologie en passant par l'ingénierie et les sciences sociales.</p>
+      <h2>Sources:</h2>
+      <p class="sources">
+        "The History of Computing" de Jack Copeland et Jonathan Bowen <br>
+        "The Art of Computer Programming" de Donald Knuth <br>
+        "The Turing Guide" de Jack Copeland et Diane Proudfoot <br>
+        Le site web de l'Association for Computing Machinery (ACM) <br>
+        Le site web de l'Institut de l'Informatique et des Systèmes d'Information (IRI) de l'Université Paris Descartes.
+      </p>
+
+    </aside>
+  </div>
+</body>
+
+</html>

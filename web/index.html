@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projet 3 - Baptiste, Quentin et Kéwan</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./src/style.css">
   <link rel="icon" href="./img/favicon.jpg">
 
   <!-- Librairie pour afficher le code -->
-  <link rel="stylesheet" href="./lib/vs2015.min.css">
-  <script src="./lib/highlight.min.js"></script>
+  <link rel="stylesheet" href="./src/vs2015.min.css">
+  <script src="./src/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
   
 </head>
@@ -24,14 +24,13 @@
     </div>
     <h1>Projet 3 - Optimisation</h1>
   </header>
-  <a href="./clair.html">Mode Clair</a>
   <div class="flex">
-
     <main>
+      <a href="./clair.html">Mode Clair</a>
       <section>
         <h1>Présentation du problème</h1>
-        <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5Go maximum</strong>. L'objetif est de classer les vidéos pour que cela donne la plus grande durée de vidéos possible, tout en étant inférieur à 5 Go</p>
-        <p>Les vidéos sont stockées dans un tableau de 10 éléments, chaque élément contient le nom de la vidéo, sa taille et sa durée.<br><br>
+        <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5Go maximum</strong>. L'objectif est de classer les vidéos pour que cela donne la plus grande durée de vidéos possible, tout en étant inférieur à 5 Go</p>
+        <p>Les vidéos sont stockées dans un tableau de dictionnaires, chaque élément contient le nom de la vidéo, sa taille et sa durée.<br><br>
         Les données sont les suivantes:</p>
 
           <table>
@@ -134,21 +133,170 @@ films = [
           <div>
             <h2>Solution 1</h2>
             La première solution est un algorithme glouton. Cet algorithme calcule pour chaque vidéo un rapport entre la taille et la durée. Il trie les vidéos par odre décroissant en fonction de ce rapport.<br>
-            Il prends ensuite les vidéos avec le plus grand rapport jusqu'à arriver à la tailleMax définie. <br><br>
+            Il prends ensuite les vidéos avec le plus grand rapport jusqu'à arriver à la tailleMax définie. <br>
+            Cette solution est intéressant car certaines vidéos ont de bien meilleurs rapports entre la durée et la taille que d’autres, elle permet de prendre les vidéos qui offriront la plus longue durée par rapport à leur taille, cela permet d’obtenir une grande durée de visionnage total pour le volume disponible. <br>
+            Cette solution est inexacte, elle ne donne pas toujours la meilleure solution possible cependant elle permet dans la majorité des cas d’obtenir une solution pertinente. <br><br>
+            
 
-            <pre><code class="language-python"></code></pre>
-            <a href="./algos/solution1.py">Télécharger le programme</a>
+            <pre><code class="language-python">
+def selectionne_max(tab, i, cle):
+  """
+  Renvoie l'indice du plus grand élément du tableau de dictionnaires tab, à partir de l'indice i, à partir duquel chercher et de la clé du dictionnaire dans laquelle chercher.
+
+  Arguments:
+  - tab: tableau de dictionnaire dans lequel chercher la valeur
+  - i: indice minimum, à partir duquel on commence à chercher dans le tableau
+  - cle: clé selon laquelle chercher la plus grande valeure
+
+  Retour :
+  - res : correspond à un entier de l'indice où se trouve la plus grande valeur
+
+  Pre-condition:
+  - cle doit etre une clé des dictionnaires du tableau tab et doit correspondre à des valeurs int ou float
+  - i ne doit pas etre plus grand que le nombre d'élément de tab
+  """
+  res = i
+  maximum = tab[i][cle]
+  for j in range(i + 1, len(tab)):
+    if tab[j][cle] > maximum:
+      maximum = tab[j][cle]
+      res = j
+  return res
+
+
+def tri_decroissant_selection(tab, cle):
+  """
+  Trie un tableau de dictionnaire avec l'algorithme du tri par sélection selon la valeur des dictionnaires pour la clé précisée en argument.
+
+  Arguments:
+  - tab: tableau de dictionnaire à trier
+  - cle: clé selon laquelle trier le tableau 
+  """
+  for i in range(len(tab)):
+    ind_max = selectionne_max(tab, i, cle) # récupère l'indice ou se trouve la plus grande valeur pas encore trié
+    tab[i], tab[ind_max] = tab[ind_max], tab[i] # échange la plus grande valeur restant à trié avec la première valeur parmis celle qui ne sont pas encore trié
+
+
+def rapport(films):
+  """     
+  Ajoute la clé rapport qui fait le rapport entre la duree et la taille pour chaque dictionnaire du tableau de films
+
+  Arguments:
+    - films: Tableau de dictionnaires conteant les informations sur chaque film
+
+  Pré-condition:
+    - Tableau de dictionnaire avec les clés : "volume", "duree"
+  """
+  for elt in films:
+    elt["rapport"] = elt["duree"] / elt["taille"]
+
+  
+def calcul_solution(films, tailleMax):
+  """
+  Pour un liste de films, optimise la duree de visionage (en minutes) pour un volume donné (en Go).
+  Pour cela, on trie les films par ordre décroissant, par rapport à leur rapport entre la duree et la taille, et on les ajoute à la solution tant que la taille de la solution est inférieur à tailleMax.
+
+  Arguments :
+    - films: tableau de dictionnaires contenant les données des films: un entier pour la duree de visionage, un autre pour le volume du fichier et un str pour le nom du fichier
+    - tailleMax: entier correspondant à l'espace disponible pour les films (en Go)
+
+  Retour :
+    - tuple: contenant un tableau des films sélectionnés, un entier de la duree de visionage optimale (en minutes) et un float du volume qu'occupent l'ensemble des films (en Go)
+
+  """
+  taille_solution = 0
+  duree_solution = 0
+  solution = []
+
+  rapport(films)
+  tri_decroissant_selection(films, "rapport")
+
+  for elt in films:
+    if taille_solution + elt["taille"] <= tailleMax:
+      taille_solution += elt["taille"]
+      duree_solution += elt["duree"]
+      solution.append(elt)
+          
+  return(solution, duree_solution, taille_solution)
+
+
+
+def afficher_solution(solution):
+  """
+  Affiche une solution donnée du problème de duree de visionage optimale
+
+  Arguments:
+    - solution: correspond à un tuple contenant un tableau des films sélectionnées, un entier de la duree de visionage optimale en minutes et un float du volume que prennent l'ensemble des films en Go
+  """
+  films, duree_total, taille_totale = solution
+  print("La duree de visionnage optimale est de", duree_total, "minutes")
+  print("Pour cela il faudrait prendre les films suivant :")
+  for film in films:
+    print(" - ", film["nom"])
+  print("Cela occuperait un volume total de :", taille_totale, "Go")
+            </code></pre>
+            <a href="./src/solution1.py">Solution 1</a><br>
+            <a href="./src/tests_solution1.py">Tests Solution 1</a>
           </div>
           <div>
             <h2>Solution 2</h2>
-            La deuxième solution est également un algorithme glouton. Il consiste à trier les vidéos par ordre décroissant en fonction de leur durée. Il prends ensuite les vidéos avec les plus grandes durées jusqu'à arriver à la tailleMax definie.<br><br>
-            <pre><code class="language-python"></code></pre>
-            <a href="./algos/solution2.py">Télécharger le programme</a>
+            La deuxième solution est également un algorithme glouton. Il consiste à trier les vidéos par ordre décroissant en fonction de leur durée. Il prends ensuite les vidéos avec les plus grandes durées jusqu'à arriver à la tailleMax definie.<br>
+            Cette solution est aussi inexacte, elle ne donne pas toujours la meilleure solution possible cependant est tout de même intéressante car elle permet de remplir le plus possible l’espace disponible pour stocker les films. Selon les données, cette solution peut être plus pertinente que la première solution.<br><br>
+            <pre><code class="language-python">
+def recupDuree(film):
+"""
+Retourne la duree d'un film. Cette fonction est utilisée pour le tri des films par ordre décroissant de duree.
+
+Arguments:
+  - film: dictionnaire du film dont on veut la duree
+  
+Pré-condition:
+  - film doit être un dictionnaire contenant la clé "duree"
+
+Retour:
+  - int: duree du film
+"""
+  return film["duree"]
+
+
+def calcul_solution(films, tailleMax):
+"""
+Pour un liste de films, optimise la duree de visionage (en minutes) pour un volume donné (en Go).
+Trie par ordre décroissant la liste de films en fonction de la durée du film. Itère sur tous les films pour prendre les films un par un jusqu'à arriver à la tailleMax.
+
+Arguments :
+  - films: tableau de dictionnaires contenant les données des films: un entier pour la duree de visionage, un autre pour le volume du fichier et un str pour le nom du fichier
+  - tailleMax: entier correspondant à l'espace disponible pour les films (en Go)
+
+Retour :
+  - tuple: contenant un tableau des films sélectionnés, un entier de la duree de visionage optimale (en minutes) et un float du volume qu'occupent l'ensemble des films (en Go)
+
+"""
+  taille_solution = 0
+  duree_solution = 0
+  solution = []
+
+  films = sorted(films, key=recupDuree, reverse=True) # Tri décroissant selon la durée du film
+
+  for elt in films:
+    if taille_solution + elt["taille"] <= tailleMax:
+      taille_solution += elt["taille"]
+      duree_solution += elt["duree"]
+      solution.append(elt)
+          
+  return(solution, duree_solution, taille_solution)
+            </code></pre>
+            <a href="./src/solution2.py">Solution 2</a><br>
+            <a href="./src/tests_solution2.py">Tests Solution 2</a>
           </div>
           <div>
             <h2>Solution 3</h2>
-            <p></p>
-            <a href="./algos/solution3.py">Télécharger le programme</a>
+            <p>La troisième solution est un algorithme de force brute, elle est la seule de nos trois solutions à toujours donner le meilleur résultat car elle vérifie toutes les combinaisons de films possible pour obtenir le meilleur temps de visionnage possible. C’est donc la solution permettant de répondre le plus précisément au problème.</p>
+            <pre><code class="language-python">
+
+            </code></pre>
+            <a href="./src/solution3.py">Solution 3</a><br>
+            <a href="./src/tests_solution3.py">Tests Solution 3</a>
           </div>
       </section>
       <section>

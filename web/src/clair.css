@@ -1,0 +1,33 @@
+@import "./style.css";
+
+body {
+  background: radial-gradient(#ff0000, #ffbb00);
+}
+
+header h1 {
+  color: #ffd6d6;
+  padding: 30px 30px 30px 30px;
+  margin: 0 20%;
+  border: 10px solid #c6e2ff;
+  border-radius: 50%;
+  animation: flashing 5s infinite alternate;
+}
+
+@keyframes flashing {
+  0%, 18%, 21%, 32%, 35%, 39%, 42%, 100% {
+    text-shadow:
+      0 0 16px #ffd6d6,
+      0 0 32px #ff035b,
+      0 0 90px #ff035b;
+    box-shadow:
+      0 0 32px #04d9ff,
+      inset 0 0 32px #04d9ff,
+      0 0 64px #04d9ff,
+      inset 0 0 64px #04d9ff;
+  }
+
+  20%, 34% {
+    text-shadow: none;
+    box-shadow: none;
+  }
+}

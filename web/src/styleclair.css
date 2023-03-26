@@ -29,20 +29,21 @@ header{
   border-bottom: 0.3px solid rgb(155, 155, 155);
   color: white;
   text-align: center;
+  padding: 20px;
+}
+
+
+
+header {
+  /* background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px; */
 }
 
 header h1{
-  text-shadow: 0 0 20px rgba(202,228,225,0.8);
+  /* text-shadow: 0 0 20px rgba(202,228,225,0.8); */
 }
-
-/* body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw; height: 100vh;
-  background: #0a0025;
-  overflow: hidden;
-} */
 
 header h1 {
   font-family: 'Commissioner', sans-serif;
@@ -85,16 +86,6 @@ pre{
   background-color: #10162fde;
   padding: 0.2rem;
   border-radius: 0.2rem;
-}
-
-/* header *{
-  padding: 6px 5px;
-} */
-header {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
 }
 
 header h1 {

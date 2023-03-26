@@ -27,36 +27,13 @@ header{
   border-bottom: 0.3px solid rgb(155, 155, 155);
   color: white;
   text-align: center;
+  padding: 20px;
 }
 
 header h1{
-  text-shadow: 0 0 20px rgba(202,228,225,0.8);
+  font-family: 'Commissioner', sans-serif;
+
   font-size: 2.6em;
-}
-
-/* body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw; height: 100vh;
-  background: #0a0025;
-  overflow: hidden;
-} */
-
-pre{
-  background-color: #10162fde;
-  padding: 0.2rem;
-  border-radius: 0.2rem;
-}
-
-/* header *{
-  padding: 6px 5px;
-} */
-header {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
 }
 
 header h1 {
@@ -69,17 +46,19 @@ header h2 {
 /* Header */
 
 aside {
-  /* width: 35%;
-  float: right; */
   width: 60vw;
-  
   margin-top: 20px;
   margin-right: 15px;
   padding-left: 0.5rem;
   margin-left: 0.5rem;
   box-shadow: inset 5px 0 5px -5px #29627e;
   font-style: italic;
-  /* color: #29627e; */
+  color: rgb(19, 19, 146);
+  height: fit-content;
+}
+
+table{
+  margin-bottom: 20px;
 }
 
 .flex{
@@ -87,9 +66,10 @@ aside {
   justify-content: space-between;
 }
 
-.flex img{
-  width: fit-content;
-  margin-left: 20px;
+@media (max-width: 1200px) {
+  .flex{
+    flex-direction: column;
+  }
 }
 
 .sources{
@@ -105,12 +85,10 @@ aside > p {
 
 /* Contenu de la page */
 main{
-  /* width: 70vw; */
   padding: 20px;
   font-size: 16px;
   line-height: 1.5;
   font-family: Arial, sans-serif;
-  /* color: #10162fe7; */
 }
 
 table {
@@ -129,13 +107,8 @@ th, td {
 }
 
 th {
-  /* background-color: #f2f2f2; */
   background-color: #92928a;
 }
-
-/* section p{ */
-  /* max-width: 60vw; */
-/* } */
 
 .var{
   color: rgb(0, 0, 85);
@@ -143,19 +116,20 @@ th {
 }
 
 .solutions{
-  /* text-align: left; */
   display: flex;  
-  /* 2 items max */
   flex-wrap: wrap;
 }
 
 .solutions div code {
   text-align: left;
 }
-/* Contenu de la page */
 
-@media (max-width: 1200px) {
-  .flex{
-    flex-direction: column;
-  }
+pre{
+  background-color: #10162fde;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
 }
+
+.solutions div { 
+  width: 80vw;
+} 
