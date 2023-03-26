@@ -29,7 +29,7 @@
       <a href="./clair.html">Mode Clair</a>
       <section>
         <h1>Présentation du problème</h1>
-        <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB <strong>5Go maximum</strong>. L'objectif est de classer les vidéos pour que cela donne la plus grande durée de vidéos possible, tout en étant inférieur à 5 Go</p>
+        <p>Aurélie pars en voyage et souhaite emporte des vidéos pour se divertir. Elle dispose sur sa clé USB de <strong>5Go maximum</strong>. L'objectif est de classer les vidéos pour que cela donne la plus grande durée de vidéos possible, tout en étant inférieur à 5 Go</p>
         <p>Les vidéos sont stockées dans un tableau de dictionnaires, chaque élément contient le nom de la vidéo, sa taille et sa durée.<br><br>
         Les données sont les suivantes:</p>
 
@@ -244,34 +244,34 @@ def afficher_solution(solution):
             Cette solution est aussi inexacte, elle ne donne pas toujours la meilleure solution possible cependant est tout de même intéressante car elle permet de remplir le plus possible l’espace disponible pour stocker les films. Selon les données, cette solution peut être plus pertinente que la première solution.<br><br>
             <pre><code class="language-python">
 def recupDuree(film):
-"""
-Retourne la duree d'un film. Cette fonction est utilisée pour le tri des films par ordre décroissant de duree.
+  """
+  Retourne la duree d'un film. Cette fonction est utilisée pour le tri des films par ordre décroissant de duree.
 
-Arguments:
-  - film: dictionnaire du film dont on veut la duree
-  
-Pré-condition:
-  - film doit être un dictionnaire contenant la clé "duree"
+  Arguments:
+    - film: dictionnaire du film dont on veut la duree
+    
+  Pré-condition:
+    - film doit être un dictionnaire contenant la clé "duree"
 
-Retour:
-  - int: duree du film
-"""
+  Retour:
+    - int: duree du film
+  """
   return film["duree"]
 
 
 def calcul_solution(films, tailleMax):
-"""
-Pour un liste de films, optimise la duree de visionage (en minutes) pour un volume donné (en Go).
-Trie par ordre décroissant la liste de films en fonction de la durée du film. Itère sur tous les films pour prendre les films un par un jusqu'à arriver à la tailleMax.
+  """
+  Pour un liste de films, optimise la duree de visionage (en minutes) pour un volume donné (en Go).
+  Trie par ordre décroissant la liste de films en fonction de la durée du film. Itère sur tous les films pour prendre les films un par un jusqu'à arriver à la tailleMax.
 
-Arguments :
-  - films: tableau de dictionnaires contenant les données des films: un entier pour la duree de visionage, un autre pour le volume du fichier et un str pour le nom du fichier
-  - tailleMax: entier correspondant à l'espace disponible pour les films (en Go)
+  Arguments :
+    - films: tableau de dictionnaires contenant les données des films: un entier pour la duree de visionage, un autre pour le volume du fichier et un str pour le nom du fichier
+    - tailleMax: entier correspondant à l'espace disponible pour les films (en Go)
 
-Retour :
-  - tuple: contenant un tableau des films sélectionnés, un entier de la duree de visionage optimale (en minutes) et un float du volume qu'occupent l'ensemble des films (en Go)
+  Retour :
+    - tuple: contenant un tableau des films sélectionnés, un entier de la duree de visionage optimale (en minutes) et un float du volume qu'occupent l'ensemble des films (en Go)
 
-"""
+  """
   taille_solution = 0
   duree_solution = 0
   solution = []
@@ -293,7 +293,77 @@ Retour :
             <h2>Solution 3</h2>
             <p>La troisième solution est un algorithme de force brute, elle est la seule de nos trois solutions à toujours donner le meilleur résultat car elle vérifie toutes les combinaisons de films possible pour obtenir le meilleur temps de visionnage possible. C’est donc la solution permettant de répondre le plus précisément au problème.</p>
             <pre><code class="language-python">
+def parties(str_bin, tab):
+  """
+  Selectionne des valeurs dans tab en fonction du nombre binaire str_bin, on prend chaque élément de tab qui correspond à un "1" dans le nombre binaire et on renvoie le tableau des éléments sélectionnés
 
+  Arguments :
+    - tab: tableau ayant autant de case que le nombre binaire a de bit
+    - str_bin: chaine de caractère correspondant a un nombre binaire
+
+  Retour:
+    - retourne le tableau des valeurs sélectionnées
+
+  Pré-condition :
+    - str_bin doit être un nombre binaire au format str
+    - tab doit avoir autant de case que le nombre de bit sur lequel le nombre binaire est définie
+  """
+  partie = []
+  for i in range(len(str_bin)): # la valeur binaire est un str donc on peut la parcourir
+    if str_bin[i] == '1':
+      partie.append(tab[i])
+  return partie
+  
+def calcul_solution(films, tailleMax):
+  """
+  Pour une liste de films, donne la meilleure duree (en minutes) de visionage pour un volume donné (en Go).
+  Pour cela, on fait toutes les combinaisons de films possibles et on teste chacune d'entre elles pour trouver la meilleure solution.
+
+  Arguments :
+    - films: tableau de dictionnaires contenant les données des films: un entier pour la duree de visionage, un autre pour le volume du fichier et un str pour le nom du fichier
+    - tailleMax: entier correspondant à l'espace disponible pour les films (en Go)
+
+  Retour :
+    - tuple: contenant un tableau des films sélectionnés, un entier de la duree de visionage optimale (en minutes) et un float du volume qu'occupent l'ensemble des films (en Go)
+    
+  """
+  films = films
+  nb_films = len(films)
+  num_solution = (2**nb_films)-1
+
+  duree_solution = 0
+  taille_solution = 0
+  meilleur_solution = []
+  if films == []:
+    return ([], 0, 0) # si la liste de films est vide on retourne des valeurs par défaut
+
+  while num_solution > 0: # boucle tant que toutes les solutions n'ont pas été testés
+    bi = bin(num_solution)[2:].zfill(nb_films) # donne la valeure binaire du numéro de la solution à testé
+    solution_teste = parties(bi, films) # génère la solution de combinaisons de films à tester
+    
+    addition_taille = 0
+    addition_duree = 0
+    
+    for film in solution_teste: 
+      if addition_taille + film["taille"] <= tailleMax:
+        fonctionne = True
+        addition_taille += film["taille"]
+        addition_duree += film["duree"]
+      else: # si la solution nécessite plus que le volume maximum on arrete et on met les variables à 0 pour s'assurer que la solution ne soit pas choisie
+        fonctionne = False
+        break
+    # On prend la solution testée comme nouvelle meilleure solution si la solution ne nécessite pas plus que le volume maximum
+    if not fonctionne:
+      pass
+    # et que la duree de visionnage est supérieure a la meilleur solution actuel ou que les duree de visionages sont égale mais que le volume de la solution testé est plus faible
+    elif duree_solution < addition_duree or (duree_solution == addition_duree and taille_solution > addition_taille): 
+      duree_solution = addition_duree
+      taille_solution = addition_taille
+      meilleur_solution = solution_teste
+    
+    num_solution -= 1 # on passe à la solution suivante
+      
+  return (meilleur_solution, duree_solution, taille_solution)
             </code></pre>
             <a href="./src/solution3.py">Solution 3</a><br>
             <a href="./src/tests_solution3.py">Tests Solution 3</a>

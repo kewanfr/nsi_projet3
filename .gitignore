@@ -1,3 +1,5 @@
 *desktop.ini
-\algo
-\files
+algo/
+files/
+settings.json
+web/css/desktop.ini

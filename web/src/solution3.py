@@ -126,7 +126,6 @@ def afficher_solution(solution):
   print("Cela occuperait un volume total de :", taille_total, "Go")
 
 
-
 if __name__ == '__main__': # permet de ne pas executer le code si le fichier est importé
   print("\nSELON LA SOLUTION BRUTE : \n")
   afficher_solution(calcul_solution(films, tailleMax))
